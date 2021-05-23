@@ -1,17 +1,20 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+ {{data.list}}
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+<script setup>
+import {onMounted ,reactive} from  "vue"
+import {getlist} from "@/api";
+let data = reactive({
+  list:[]
+})
+onMounted(()=>{
+  getlist().then(res=>{
+    data.list = res
+    console.log(res,'data')
+  })
+})
 </script>
 
 <style>
